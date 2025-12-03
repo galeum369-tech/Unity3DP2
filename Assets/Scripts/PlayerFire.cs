@@ -40,6 +40,10 @@ public class PlayerFire : MonoBehaviour
                 //Hit 정보안에 노멀벡터의 값도 알수 있다
                 //법선벡터 또는 노멀벡터는 평면에 수직인 벡터
                 bulletImpact.transform.forward = hit.normal;
+
+                //내 총알에 충돌햇으니 체력깍기
+                EnemyFSMT enemy = hit.collider.GetComponent<EnemyFSMT>();
+                enemy.HitDamage(5);
             }
 
             // 레이어 마스크 사용 충돌처리 (최적화)
