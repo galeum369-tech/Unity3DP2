@@ -10,6 +10,13 @@ public class CamRotate : MonoBehaviour
     public float speed = 200f;      //회전 속도 (Time.deltaTime 곱해서 1초당 200도 회전)
     float angleX, angleY;           //직접 제어할 회전 각도
 
+    private void Start()
+    {
+        angleY = 0;
+        angleX = 0;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
