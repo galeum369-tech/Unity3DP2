@@ -45,8 +45,8 @@ public class EnemyFSMT : MonoBehaviour
 
     //몬스터 일반변수
     int hp = 100;
-    int att = 5;
-    float speed = 5f;
+    //int att = 5;
+    //float speed = 5f;
 
     //공격 딜레이
     float attTime = 2f;                 //2초에 한번 공격
@@ -63,7 +63,7 @@ public class EnemyFSMT : MonoBehaviour
 
 
     //애니메이션을 제어하기 위한 애니메이션 컴포넌트
-    //Animator anim;
+    public Animator anim;
 
     
 
@@ -79,6 +79,8 @@ public class EnemyFSMT : MonoBehaviour
         player = GameObject.Find("Player").transform;
         //캐릭터 컨트롤러
         cc = GetComponent<CharacterController>();
+
+        anim = GetComponentInChildren<Animator>();    
 
         //네비메쉬에이전트
         agent = GetComponent<NavMeshAgent>();
@@ -128,6 +130,7 @@ public class EnemyFSMT : MonoBehaviour
         {
             state = EnemyState.Move;
             print("상태전환 : Idle -> Move");
+            anim.SetTrigger("Moving");
         }
 
     }
@@ -215,6 +218,8 @@ public class EnemyFSMT : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > attTime)
             {
+
+                anim.SetTrigger("Attack");
                 print("공격");
                 //플레이어의 필요한 스크립트 컴포넌트를 가져와서 데미지를 주면 된다
                 //player.GetComponent<PlayerMove>().hitDamage(att);
@@ -223,7 +228,6 @@ public class EnemyFSMT : MonoBehaviour
                 timer = 0;
 
                 //애니메이션 공격
-
             }
         }
         else
@@ -232,6 +236,7 @@ public class EnemyFSMT : MonoBehaviour
             state = EnemyState.Move;
             print("상태전환 : Attack -> Move");
             //애니메이션 무브
+            anim.SetTrigger("Moving");
         }
 
 
@@ -252,6 +257,7 @@ public class EnemyFSMT : MonoBehaviour
             agent.enabled = true;
             //이동처리
             agent.SetDestination(startPoint);
+            anim.SetTrigger("Moving");
 
         }
         else
@@ -263,7 +269,7 @@ public class EnemyFSMT : MonoBehaviour
             //상태변경
             state = EnemyState.Idle;
             print("상태변환 : Return -> Idle");
-
+            anim.SetTrigger("Idle");
             agent.enabled = false;
         }
     }
@@ -287,14 +293,12 @@ public class EnemyFSMT : MonoBehaviour
             state = EnemyState.Damaged;
             print("상태전환 : Anystate -> Damaged");
             print("HP: " + hp);
-            Damaged();
         }
         //0이면 죽은상태
         else
         {
             state = EnemyState.Die;
             print("상태전환 : Anystate -> DIe");
-            Die();
         }
 
     }
@@ -310,12 +314,14 @@ public class EnemyFSMT : MonoBehaviour
 
         //피격상태를 처리하기 위해서는 간단한 코루틴 사용
         StartCoroutine(DamageProc());
+
     }
 
     IEnumerator DamageProc()
     {
         //피격모션 시간만큼 기다리기
-        yield return new WaitForSeconds(1f);
+        anim.SetTrigger("Damaged");
+        yield return new WaitForSeconds(1.5f);
         //현재상태를 이동으로 전환
         state = EnemyState.Move;
         print("상태전환 : Damaged -> Move");
@@ -331,18 +337,22 @@ public class EnemyFSMT : MonoBehaviour
 
         agent.enabled = false;
 
+        //진행중인 모든 코루티은 정지
+        //StopAllCoroutines();
+
+        anim.SetTrigger("Die");
         //죽음상태 처리를 간단한 코루틴 사용
         StartCoroutine(DieProc());
 
-        //진행중인 모든 코루티은 정지
-        //StopAllCoroutines();
+        
         
     }
 
     IEnumerator DieProc()
     {
         //2초후에 자기자신 제거
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(4f);
         print("죽음");
         Destroy(gameObject);
     }
