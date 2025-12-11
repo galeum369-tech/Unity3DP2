@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainUI.uss?fileID=7433441132597879392&amp;guid=31ba859821271cd459a94b639519b3d5&amp;type=3#MainUI" />
+    <ui:VisualElement style="flex-grow: 1; position: relative; height: 896px; width: 1908px; top: 0; left: 0; bottom: 0; right: 0; align-self: center; justify-content: center; align-items: center; font-size: 50px;">
+        <ui:Label text="Label" style="width: 200px; height: 100px; top: auto; right: auto; left: auto; bottom: auto;" />
+        <ui:Button text="Button" style="height: 100px; width: 200px; text-overflow: clip; position: relative; background-color: rgb(255, 0, 0); font-size: 50px;" />
+        <ui:Button text="Button" style="height: 100px; width: 200px; background-color: rgb(255, 0, 0);" />
+        <ui:Button text="Button" style="width: 200px; height: 100px; background-color: rgb(255, 0, 0); font-size: 50px;" />
+    </ui:VisualElement>
+</ui:UXML>
