@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_UI/MainUI.uss?fileID=7433441132597879392&amp;guid=3c370b3aa448eb9408b9de4b0cd7d50d&amp;type=3#MainUI" />
+    <ui:VisualElement enabled="true" style="flex-grow: 1; flex-direction: column; justify-content: center; align-self: center; align-content: auto; width: 170px;">
+        <ui:Label text="Title" name="Title" class="label-title" style="-unity-text-align: upper-center; background-color: rgb(255, 255, 255); font-size: 20px; -unity-font-style: bold;" />
+        <ui:Button text="Start" name="Start" class="button" />
+        <ui:Button text="Setting" name="Setting" class="button" />
+        <ui:Button text="Stop" name="Stop" class="button" />
+    </ui:VisualElement>
+    <ui:ProgressBar title="my-progress" data-source="project://database/Assets/_UI/Player.asset?fileID=11400000&amp;guid=16d2f6a89624b9244af5538d798dbca1&amp;type=2#Player" name="HpBar">
+        <Bindings>
+            <ui:DataBinding property="value" binding-mode="TwoWay" data-source-path="hp" />
+        </Bindings>
+    </ui:ProgressBar>
+</ui:UXML>

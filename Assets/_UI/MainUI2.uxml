@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Template name="MainUI" src="project://database/Assets/_UI/MainUI.uxml?fileID=9197481963319205126&amp;guid=a1ccb79bddbe94e4daa8cd80f7aeb8b6&amp;type=3#MainUI" />
+    <Style src="project://database/Assets/_UI/MainUI.uss?fileID=7433441132597879392&amp;guid=3c370b3aa448eb9408b9de4b0cd7d50d&amp;type=3#MainUI" />
+    <ui:Instance template="MainUI" style="height: 1080px;" />
+</ui:UXML>
